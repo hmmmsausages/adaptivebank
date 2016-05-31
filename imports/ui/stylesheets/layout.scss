@@ -1,0 +1,25 @@
+@import './utils.scss';
+
+body {
+  background-color: $color2;
+  background-image: linear-gradient(to bottom, $color2, $color4);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  padding-top: 100px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  background-color: $color5;
+
+  .navbar-brand {
+    color: $color2;
+  }
+}
+
+@media (min-width: 768px) {
+  .main-container {
+    max-width: 730px;
+  }
+}

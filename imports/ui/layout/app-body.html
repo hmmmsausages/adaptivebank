@@ -1,0 +1,44 @@
+<template name="App_body">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">AdaptiveBank</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <div class="navbar-form navbar-right">
+                    <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="fa fa-home" aria-hidden="true"></span>
+                        Contact us
+                    </button>
+                    <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                        Find a branch
+                    </button>
+                    <button type="button" class="btn btn-default" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        Search
+                    </button>
+                    <button type="submit" class="btn btn-success">Log on</button>
+                </div>
+            </div><!--/.navbar-collapse -->
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        {{>Template.dynamic template=main}}
+
+        <hr>
+        <footer>
+            <p>&copy; 2016 Andre Mueller - King's College London</p>
+        </footer>
+    </div>
+
+
+</template>

@@ -1,0 +1,44 @@
+<template name="Login">
+    <h2 class="ui center aligned teal image header">
+        <img src="../img/logo_square.png" class="inverted teal image">
+        <div class="content">Welcome to Online Banking</div>
+    </h2>
+    <div class="ui message">
+        Please enter your Customer Number and Passowrd
+        <p>(if you have forgotten your Customer Number simply click on the link ‘Forgotten your Customer Number’ and
+            follow the instructions).</p>
+    </div>
+    <form class="ui large form">
+        <div class="ui inverted teal stacked segment">
+            <div class="field">
+                <div class="ui left icon fluid input">
+                    <i class="user icon"></i>
+                    <input type="text" name="userId" placeholder="Customer number">
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui left icon fluid input">
+                    <i class="lock icon"></i>
+                    <input type="password" name="password" placeholder="Password">
+                </div>
+            </div>
+            <input type="submit" class="ui fluid large white submit button" value="Log in">
+        </div>
+
+        <div class="ui error message"></div>
+    </form>
+
+    <div class="ui message">
+        <h4>Problems logging in?</h4>
+        <div class="ui list">
+            <a class="item">
+                <i class="right triangle icon"></i>
+                <div class="content">Forgot your Customer Number?</div>
+            </a>
+            <a class="item">
+                <i class="right triangle icon"></i>
+                <div class="content">Forgot your Password?</div>
+            </a>
+        </div>
+    </div>
+</template>

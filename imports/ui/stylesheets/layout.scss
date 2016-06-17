@@ -1,25 +1,15 @@
-@import './utils.scss';
+@import 'utils';
 
-body {
-  background-color: $color2;
-  background-image: linear-gradient(to bottom, $color2, $color4);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-
-  padding-top: 100px;
-  padding-bottom: 20px;
+.adaptive-logo {
+  margin-right: 1.5em;
 }
 
-.navbar {
-  background-color: $color5;
-
-  .navbar-brand {
-    color: $color2;
-  }
+.main.container {
+  margin-top: 7em;
+  margin-bottom: 5em;
 }
 
-@media (min-width: 768px) {
-  .main-container {
-    max-width: 730px;
-  }
+.ui.footer.segment {
+  margin: 5em 0em 0em;
+  padding: 5em 0em;
 }

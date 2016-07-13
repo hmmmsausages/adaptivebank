@@ -1,7 +1,8 @@
 // IntelliJ has problems resolving them and throws error when trying to commit - therefore disable 'file resolve errors'
 // Load Twitter Bootstrap 3 - SASS/SCSS version
 // Other stylesheets
-@import '{}/imports/ui/stylesheets/layout.scss';
-@import '{}/imports/ui/stylesheets/frontpage.scss';
-@import '{}/imports/ui/stylesheets/account-statement.scss';
-
+@import '{}/imports/adaptivebank/ui/stylesheets/layout.scss';
+@import '{}/imports/adaptivebank/ui/stylesheets/frontpage.scss';
+@import '{}/imports/adaptivebank/ui/stylesheets/account-statement.scss';
+//Import Training Add-On Stylesheets
+@import '{}/imports/adaptivetraining/ui/stylesheets/layout.scss';

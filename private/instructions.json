@@ -1,0 +1,78 @@
+{
+  "taskclass1": {
+    "id": 1,
+    "topic": "Log-In / Log-Out",
+    "learningtasks": [
+      {
+        "id": 1,
+        "description": [
+          "In order to be able to use online banking, every customer must authorise themselves before being able to access their online banking account.",
+          "This procedure requires some basic steps, which are need to be executed every time you want to start a new online banking session."
+        ],
+        "steps": [
+          "Click on the 'Log In' button located in the upper right corner of the website.",
+          "Enter the Customer Number \"123456789\" into the field with the caption \"Customer number\".",
+          "Enter the Password \"testtest\" into the field with the caption \"Password\".",
+          "Subsequently click on the \"Log in\" button located underneath the input fields to log in to the online banking system."
+        ],
+        "jit": [
+          "Username: 123456789",
+          "Password: testtest"
+        ],
+        "deactivated-elements": [
+          "a"
+        ],
+        "ideal-path": []
+      },
+      {
+        "id": 2,
+        "description": [
+          "Learners have to recall the steps they took in the previous example: 1) Click on 'Log On' 2) Type in your credentials"
+        ],
+        "jit": [
+          "Username: 123456789",
+          "Password: testtest"
+        ],
+        "steps": [],
+        "deactivated-elements": [
+          "a"
+        ],
+        "ideal-path": []
+      }
+    ]
+  },
+  "taskclass2": {
+    "id": 2,
+    "topic": "Log-In / Log-Out",
+    "learningtasks": [
+      {
+        "id": 1,
+        "description": [
+          "Learners follow the step in the detailed walkthrough: 1) Click on 'Log On' 2) Type in your credentials"
+        ],
+        "steps": [],
+        "jit": [
+          "Username: 123456789 - Password: testtest"
+        ],
+        "deactivated-elements": [
+          "a"
+        ],
+        "ideal-path": []
+      },
+      {
+        "id": 2,
+        "description": [
+          "Learners have to recall the steps they took in the previous example: 1) Click on 'Log On' 2) Type in your credentials"
+        ],
+        "steps": [],
+        "jit": [
+          "Username: 123456789 - Password: testtest"
+        ],
+        "deactivated-elements": [
+          "a"
+        ],
+        "ideal-path": []
+      }
+    ]
+  }
+}

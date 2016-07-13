@@ -1,0 +1,37 @@
+<template name="Account_info_block">
+    <div class="ui vertically divided celled grid">
+        {{#with currentUser}}
+            {{#with profile}}
+                {{#with account}}
+                    <div class="row">
+                        <div class="sixteen wide column">
+                            <p>{{name}}: {{sortcode}} - {{number}}</p>
+                            <div class="ui large horizontal statistic">
+                                <div class="value">
+                                    £{{balance}}
+                                </div>
+                                <div class="label">
+                                    Balance
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="sixteen wide column">
+                            £{{available}} - Funds available <span class="ui icon" id="funds-info"
+                                                                   data-title="Funds available?"
+                                                                   data-content="This is your account balance that includes all transfers that are reserved but not booked yet."
+                                                                   data-position="bottom left"><i
+                                class="circular question mark icon"></i></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="sixteen wide column">
+                            Apply for our Silver Account (for just £9.95 per month)
+                        </div>
+                    </div>
+                {{/with}}
+            {{/with}}
+        {{/with}}
+    </div>
+</template>

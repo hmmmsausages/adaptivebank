@@ -1,0 +1,30 @@
+<template name="Instruction_display">
+    {{#each instructions}}
+        <h2>Taskclass: "{{topic}}"</h2>
+        {{#each learningtasks}}
+            <div class="ui grid">
+                <div class="twelve wide column">
+                    <h3>Learning task No. {{id}}</h3>
+                    {{#each description}}
+                        <p>{{this}}</p>
+                    {{/each}}
+                    <h4>Steps:</h4>
+                    <ol>
+                        {{#each steps}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ol>
+                </div>
+                <div class="four wide column">
+                    <h4>Supportive Information</h4>
+                    <ul>
+                        {{#each jit}}
+                            <li>{{this}}</li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        {{/each}}
+    {{/each}}
+    <button id="next-lesson" class="ui button">Next Lesson</button>
+</template>

@@ -4,9 +4,4 @@ import {$} from 'meteor/jquery';
 import {Semantic} from 'meteor/semantic:ui-css';
 
 import './account-summary.html';
-
-Template.Account_summary.onRendered(function () {
-    Meteor.defer(function () {
-        $("#funds-info").popup();
-    });
-});
+import './account-info-block.js';

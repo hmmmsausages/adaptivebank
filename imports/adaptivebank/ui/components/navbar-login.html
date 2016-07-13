@@ -1,0 +1,29 @@
+<template name="Navbar_login">
+    <div class="ui borderless menu">
+        <div class="item">
+            {{#with currentUser}}
+                {{#with profile}}
+                    <h4 class="ui header">{{title}}. {{name}}</h4>
+                    <i class="lock icon"></i>Last logged in on {{lastlogin}}
+                {{/with}}
+            {{/with}}
+        </div>
+        <div class="right menu">
+            <a href="{{pathFor 'App.account-summary'}}" class="item">
+                <i class="home icon"></i>
+            </a>
+            <a href="{{pathFor 'App.account-summary'}}" class="item">
+                Your Account
+            </a>
+            <a class="item">
+                Your Profile
+            </a>
+            <a class="item">
+                Help &amp; Support
+            </a>
+            <a class="item">
+                <i class="mail icon"></i>
+            </a>
+        </div>
+    </div>
+</template>

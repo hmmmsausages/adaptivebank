@@ -60,7 +60,7 @@ FlowRouter.route('/login', {
 });
 
 
-function checkedLoggedIn(ctx, redirect) {
+function checkedLoggedIn() {
     if (!Meteor.userId()) {
         FlowRouter.go('App.login');
     }

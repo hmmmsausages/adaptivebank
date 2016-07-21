@@ -1,35 +1,36 @@
 <template name="App_body">
-    <div class="app-container">
-        <!-- Menu -->
-        <div class="ui teal inverted borderless fixed menu">
-            <div class="ui container">
-                <a href="/" class="header item">
-                    <img class="logo adaptive-logo" src="/img/logo.png"> Adaptive Bank
+    <!-- Menu -->
+    <div class="ui teal inverted borderless fixed menu">
+        <div class="ui container">
+            <a href="/" class="header item">
+                <img class="logo adaptive-logo" src="/img/logo.png"> Adaptive Bank
+            </a>
+            <div class="right menu">
+                <a class="item">
+                    <i class="phone icon"></i> Contact us
                 </a>
-                <div class="right menu">
-                    <a class="item">
-                        <i class="phone icon"></i> Contact us
+                <a class="item">
+                    <i class="map icon"></i> Find nearest branch
+                </a>
+                <a class="item">
+                    <i class="search icon"></i> Search
+                </a>
+                {{#if currentUser}}
+                    <a href="#" class="active item logout-link" id="logout">
+                        <i class="lock icon"></i> Log out
                     </a>
-                    <a class="item">
-                        <i class="map icon"></i> Find nearest branch
+                {{else}}
+                    <a href="{{pathFor 'App.login'}}" class="active item" id="login">
+                        <i class="lock icon"></i> Log in
                     </a>
-                    <a class="item">
-                        <i class="search icon"></i> Search
-                    </a>
-                    {{#if currentUser}}
-                        <a href="#" class="active item logout-link">
-                            <i class="lock icon"></i> Log out
-                        </a>
-                    {{else}}
-                        <a href="{{pathFor 'App.login'}}" class="active item">
-                            <i class="lock icon"></i> Log in
-                        </a>
-                    {{/if}}
-                </div>
+                {{/if}}
             </div>
         </div>
+    </div>
 
-        <div class="ui main container">
+
+    <div class="app-container">
+        <div id="main-container" class="ui main container">
             {{>Template.dynamic template=main }}
         </div>
 
@@ -84,8 +85,9 @@
                 </div>
             </div>
         </div>
+        <!-- Insert Training Add-on-->
+        {{>Training_addon_body}}
     </div>
 
-    <!-- Insert Training Add-on-->
-    {{>Training_addon_body}}
+
 </template>

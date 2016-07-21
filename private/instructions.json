@@ -19,10 +19,14 @@
           "Username: 123456789",
           "Password: testtest"
         ],
-        "deactivated-elements": [
+        "deactivatedElements": [
           "a"
         ],
-        "ideal-path": []
+        "activatedElements": [
+          "#login",
+          "#logout"
+        ],
+        "idealPath": []
       },
       {
         "id": 2,
@@ -34,10 +38,13 @@
           "Password: testtest"
         ],
         "steps": [],
-        "deactivated-elements": [
-          "a"
+        "deactivatedElements": [
         ],
-        "ideal-path": []
+        "activatedElements": [
+          "#login",
+          "#logout"
+        ],
+        "idealPath": []
       }
     ]
   },
@@ -54,10 +61,14 @@
         "jit": [
           "Username: 123456789 - Password: testtest"
         ],
-        "deactivated-elements": [
+        "deactivatedElements": [
           "a"
         ],
-        "ideal-path": []
+        "activatedElements": [
+          "#login",
+          "#logout"
+        ],
+        "idealPath": []
       },
       {
         "id": 2,
@@ -68,10 +79,14 @@
         "jit": [
           "Username: 123456789 - Password: testtest"
         ],
-        "deactivated-elements": [
+        "deactivatedElements": [
           "a"
         ],
-        "ideal-path": []
+        "activatedElements": [
+          "#login",
+          "#logout"
+        ],
+        "idealPath": []
       }
     ]
   }

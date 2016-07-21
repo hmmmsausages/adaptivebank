@@ -15,7 +15,6 @@ Template.Training_addon_body.onRendered(function () {
 
         $('#toggle-sidebar').click(function () {
             $('#training-content').toggle(200);
-
             $('#toggle-symbol').toggleClass("up down");
         });
     });

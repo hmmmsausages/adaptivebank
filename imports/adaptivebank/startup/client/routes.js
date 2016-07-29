@@ -17,7 +17,11 @@ import '../../ui/user_accounts/user-accounts-templates.js';
 FlowRouter.route('/', {
     name: 'App.frontpage',
     action() {
-        BlazeLayout.render('App_body', {main: 'Frontpage'});
+        if (Meteor.userId()) {
+            FlowRouter.go('App.account-summary');
+        } else {
+            BlazeLayout.render('App_body', {main: 'Frontpage'});
+        }
     }
 });
 

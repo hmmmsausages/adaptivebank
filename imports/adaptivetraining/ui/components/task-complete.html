@@ -1,0 +1,25 @@
+<template name="Task_complete">
+    <div class="ui center aligned equal width grid">
+        <div class="row">
+            <div class="sixteen column">
+                <h1>Congratulations!</h1>
+                <h3> You have successfully completed this task.</h3>
+                {{#if notPerformedWell}}
+                    <div class="ui yellow raised segment">
+                        We noticed that you were struggling to find the ideal way or took quite long to complete the
+                        task.<br>We would recommend to repeat this task, so you're more comfortable with this topic.
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="ui huge buttons">
+                    <button id="repeatTask" class="ui button">Repeat Task</button>
+                    <div class="or"></div>
+                    <button id="nextTask" class="ui positive button">Next Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

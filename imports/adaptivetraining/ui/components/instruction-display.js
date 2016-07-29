@@ -1,53 +1,96 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
-import {ReactiveVar} from 'meteor/reactive-var';
+import {ReactiveDict} from 'meteor/reactive-dict';
 import {$} from 'meteor/jquery';
-import {Tracker} from 'meteor/tracker';
+import {Session} from 'meteor/session';
 
+import {TrainingProgress} from '../../api/training-progress.js'
 import {Instructions} from '../../api/instructions.js';
+
 
 import './instruction-display.html';
 
 import {AdaptiveComplexity} from '../../api/adaptive-complexity.js';
 import {AdaptiveAdvice} from '../../api/adaptive-advice.js';
+import {TaskEvaluation} from '../../api/task-evaluation.js';
 
-let taskclassID = new ReactiveVar(1);
-let learningtaskID = new ReactiveVar(1);
-let deactivatedElements = "";
-let activatedElements = "";
 
 Template.Instruction_display.onCreated(function () {
-    Tracker.autorun(function () {
-        Meteor.subscribe('instructions', taskclassID.get(), learningtaskID.get());
+    AdaptiveAdvice.resetParameter();
 
-        // Get document of current learning task
-        let mongoDocument = Instructions.find().fetch()[0];
-        if (mongoDocument) {
-            deactivatedElements = mongoDocument['learningtasks'][0]['deactivatedElements'].join(', ');
-            activatedElements = mongoDocument['learningtasks'][0]['activatedElements'].join(', ');
+    this.autorun(function () {
+
+        if (Meteor.subscribe('trainingProgress').ready()) {
+            let trainingProgress = TrainingProgress.findOne();
+
+            let taskclassId = 1;
+            let learningtaskId = 1;
+
+            if (trainingProgress) {
+                taskclassId = trainingProgress.taskclassId;
+                learningtaskId = trainingProgress.learningtaskId;
+            }
+
+            if (Meteor.subscribe('instruction', taskclassId, learningtaskId).ready()) {
+                // Get document of current learning task
+                let mongoDocument = Instructions.findOne();
+                let deactivatedElements = mongoDocument['learningtasks'][0]['deactivatedElements'].join(', ');
+                let activatedElements = mongoDocument['learningtasks'][0]['activatedElements'].join(', ');
+                let taskGoals = mongoDocument['learningtasks'][0]['taskGoals'];
+                let idealPath = mongoDocument['learningtasks'][0]['idealPath'];
+                let limitOfAllowedPathAlterations = mongoDocument['learningtasks'][0]['limitOfAllowedPathAlterations'];
+
+                console.log(deactivatedElements, activatedElements, taskGoals, idealPath, limitOfAllowedPathAlterations);
+
+                //======
+                // Apply AdaptiveComplexity and AdaptiveAdvice components respectively
+                AdaptiveComplexity.apply({
+                    deactivatedElements: deactivatedElements,
+                    activatedElements: activatedElements
+                });
+                AdaptiveAdvice.apply(idealPath, limitOfAllowedPathAlterations);
+
+                if (TaskEvaluation.observeTaskGoals(taskGoals)) {
+                    Session.set('currentTrainingView', 'Task_complete');
+                }
+                //=====
+
+                //disconnect previous MutationObserver instance if existent
+                if (Template.Instruction_display.observer) {
+                    Template.Instruction_display.observer.disconnect();
+                }
+                // MutationObserver for Subtree changes
+                Template.Instruction_display.observer = new MutationObserver(function () {
+                    // Apply AdaptiveComplexity and AdaptiveAdvice components respectively
+                    AdaptiveComplexity.apply({
+                        deactivatedElements: deactivatedElements,
+                        activatedElements: activatedElements
+                    });
+                    AdaptiveAdvice.apply(idealPath, limitOfAllowedPathAlterations);
+                    if (TaskEvaluation.observeTaskGoals(taskGoals)) {
+                        Session.set('currentTrainingView', 'Task_complete');
+                    }
+                });
+
+                // Start observer
+                Template.Instruction_display.observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+            }
         }
-
-        // MutationObserver for Subtree changes
-        let observer = new MutationObserver(function () {
-            // Reset complexity of previous learning task
-            AdaptiveComplexity.reset();
-            AdaptiveAdvice.reset();
-
-
-            // Apply AdaptiveComplexity and AdaptiveAdvice components respectively
-            AdaptiveComplexity.apply({
-                deactivatedElements: deactivatedElements,
-                activatedElements: activatedElements
-            });
-            AdaptiveAdvice.apply();
-        });
-
-        // Start observer
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
     });
+});
+
+Template.Instruction_display.onDestroyed(function () {
+    //disconnect remaining MutationObserver instance if existent
+    if (Template.Instruction_display.observer) {
+        Template.Instruction_display.observer.disconnect();
+    }
+
+    //reset adaptive components
+    AdaptiveAdvice.stop();
+    AdaptiveComplexity.reset();
 });
 
 
@@ -58,10 +101,7 @@ Template.Instruction_display.helpers({
 });
 
 Template.Instruction_display.events({
-    'click #next-lesson': function (e) {
-        learningtaskID.set(learningtaskID.get() + 1);
-    },
-    'click #previous-lesson': function (e) {
-        learningtaskID.set(learningtaskID.get() - 1);
+    'click #task-overview': function () {
+        Session.set('currentTrainingView', 'Task_overview');
     }
 });

@@ -5,6 +5,7 @@
     "learningtasks": [
       {
         "id": 1,
+        "topic": "Imitation",
         "description": [
           "In order to be able to use online banking, every customer must authorise themselves before being able to access their online banking account.",
           "This procedure requires some basic steps, which are need to be executed every time you want to start a new online banking session."
@@ -24,12 +25,22 @@
         ],
         "activatedElements": [
           "#login",
-          "#logout"
+          "#logout",
+          "#adaptive-bank-logo"
         ],
-        "idealPath": []
+        "idealPath": [
+          "login"
+        ],
+        "limitOfAllowedPathAlterations": 4,
+        "taskGoals": {
+          "loggedIn": true,
+          "path": "/account-summary",
+          "query": "Meteor.users.find({username: '123456789'})"
+        }
       },
       {
         "id": 2,
+        "topic": "Completion",
         "description": [
           "Learners have to recall the steps they took in the previous example: 1) Click on 'Log On' 2) Type in your credentials"
         ],
@@ -39,25 +50,37 @@
         ],
         "steps": [],
         "deactivatedElements": [
+          "a"
         ],
         "activatedElements": [
           "#login",
-          "#logout"
+          "#logout",
+          "#adaptive-bank-logo",
+          "#make-payment"
         ],
-        "idealPath": []
+        "idealPath": [],
+        "limitOfAllowedPathAlterations": 0,
+        "taskGoals": {
+          "loggedIn": true,
+          "path": "/payment"
+        }
       }
     ]
   },
   "taskclass2": {
     "id": 2,
-    "topic": "Log-In / Log-Out",
+    "topic": "View Statement",
     "learningtasks": [
       {
         "id": 1,
+        "topic": "Completion",
         "description": [
-          "Learners follow the step in the detailed walkthrough: 1) Click on 'Log On' 2) Type in your credentials"
+          "One of the most comfortable features of online banking is the ability to view and check your incoming and outgoing transactions on your account statement from home, without the need of going to your local branch anymore. To do this you need to do following actions:"
         ],
-        "steps": [],
+        "steps": [
+          "Log in to your online banking with your online banking credentials",
+          "Navigate to the \"View Statement\" page"
+        ],
         "jit": [
           "Username: 123456789 - Password: testtest"
         ],
@@ -66,14 +89,25 @@
         ],
         "activatedElements": [
           "#login",
-          "#logout"
+          "#view-statement",
+          "#account-summary",
+          "#adaptive-bank-logo"
         ],
-        "idealPath": []
+        "idealPath": [
+          "login",
+          "view-statement"
+        ],
+        "limitOfAllowedPathAlterations": 2,
+        "taskGoals": {
+          "loggedIn": true,
+          "path": "/account-statement"
+        }
       },
       {
         "id": 2,
+        "topic": "Imitation",
         "description": [
-          "Learners have to recall the steps they took in the previous example: 1) Click on 'Log On' 2) Type in your credentials"
+          "Another task !! .... "
         ],
         "steps": [],
         "jit": [
@@ -84,9 +118,16 @@
         ],
         "activatedElements": [
           "#login",
-          "#logout"
+          "#view-statement",
+          "#account-summary",
+          "#adaptive-bank-logo"
         ],
-        "idealPath": []
+        "idealPath": [],
+        "limitOfAllowedPathAlterations": 4,
+        "taskGoals": {
+          "loggedIn": true,
+          "path": "/view-statement-plschangeurl"
+        }
       }
     ]
   }

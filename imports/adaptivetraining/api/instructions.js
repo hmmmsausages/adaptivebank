@@ -4,16 +4,28 @@ import {Mongo} from 'meteor/mongo';
 export const Instructions = new Mongo.Collection('instructions');
 
 if (Meteor.isServer) {
-    Meteor.publish('instructions', function instructionsPublication(taskclassID, learningtaskID) {
-        // check(taskclassID,Integer);
-        // check(learningtaskID,Integer);
-        // Returns only document with learningtasks.id==1 from task class with id==1
-        //todo make return statement dependent on learners progress
-        return Instructions.find({"id": taskclassID, "learningtasks.id": learningtaskID}, {
+    Meteor.publish('instruction', function (taskclassId, learningtaskId) {
+        return Instructions.find({"id": taskclassId, "learningtasks.id": learningtaskId}, {
             fields: {
                 topic: 1,
-                learningtasks: {$elemMatch: {id: learningtaskID}}
+                learningtasks: {$elemMatch: {id: learningtaskId}}
             }
         });
     });
+    Meteor.publish('instructions', function () {
+        return Instructions.find({});
+    });
+
+    Meteor.methods({
+        'instructions.size': function () {
+            let result = {};
+            let mongoDocument = Instructions.find().fetch();
+            for (let i = 0; i < mongoDocument.length; i++) {
+                result[i + 1] = mongoDocument[i]['learningtasks'].length;
+            }
+            return result;
+        }
+    });
 }
+
+

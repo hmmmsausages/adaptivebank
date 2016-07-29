@@ -1,10 +1,21 @@
 <template name="Training_addon_body">
     <div class="ui bottom sidebar blue inverted segment">
-        <button id="toggle-sidebar" class="ui icon button">
-            <i id="toggle-symbol" class="arrow circle down icon"></i>
+        <button id="toggle-sidebar" class="ui teal labeled icon button">
+            <i id="toggle-symbol" class="arrow circle up icon"></i>
+            Show/Hide Training Add-On
         </button>
         <div id="training-content" class="ui container">
-            {{> Instruction_display}}
+            <div class="ui inverted divider"></div>
+            {{> Template.dynamic template=trainingView }}
+                <!--{{#if onStartResumeTraining}}-->
+                <!--{{#if onTaskComplete}}-->
+                <!--{{> Task_complete}}-->
+                    <!--{{else}}-->
+                <!--{{> Instruction_display}}-->
+                    <!--{{/if}}-->
+                <!--{{else}}-->
+            <!--{{> Instruction_welcome}}-->
+                <!--{{/if}}-->
         </div>
     </div>
 </template>

@@ -10,6 +10,10 @@ function preventLinkExecution(e) {
 
 
 AdaptiveComplexity.apply = function (elements) {
+    // Reset bound elements
+    AdaptiveComplexity.reset();
+
+    // Bind elements
     if (elements) {
         check(elements, {
             deactivatedElements: Match.Maybe(String),

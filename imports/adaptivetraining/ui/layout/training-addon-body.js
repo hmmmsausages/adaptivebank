@@ -14,13 +14,13 @@ Template.Training_addon_body.onCreated(function () {
     Session.set('currentTrainingView', 'Instruction_welcome');
 
 
-    Tracker.autorun(function () {
-        if (!Meteor.userId()) {
-            Session.set('currentTrainingView', 'Instruction_welcome');
-        } else {
-            Session.set('currentTrainingView', 'Instruction_display');
-        }
-    });
+    // Tracker.autorun(function () {
+    //     if (!Meteor.userId()) {
+    //         Session.set('currentTrainingView', 'Instruction_welcome');
+    //     } else {
+    //         Session.set('currentTrainingView', 'Task_overview');
+    //     }
+    // });
 });
 
 Template.Training_addon_body.onRendered(function () {
@@ -43,6 +43,9 @@ Template.Training_addon_body.onRendered(function () {
 
 Template.Training_addon_body.helpers({
     'trainingView': function () {
+        if (Session.get('currentTrainingView') === 'Task_complete') {
+            $('#training-content').show(200);
+        }
         return Session.get('currentTrainingView');
     }
 });

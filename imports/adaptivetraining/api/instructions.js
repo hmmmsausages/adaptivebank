@@ -13,7 +13,7 @@ if (Meteor.isServer) {
         });
     });
     Meteor.publish('instructions', function () {
-        return Instructions.find({});
+        return Instructions.find({}, {sort: {id: 1}});
     });
 
     Meteor.methods({

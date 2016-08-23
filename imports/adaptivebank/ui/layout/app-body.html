@@ -86,7 +86,12 @@
             </div>
         </div>
         <!-- Insert Training Add-on-->
-        {{>Training_addon_body}}
+        {{#if currentUser}}
+            {{#if isInRole 'admin'}}
+            {{else}}
+                {{>Training_addon_body}}
+            {{/if}}
+        {{/if}}
     </div>
 
 

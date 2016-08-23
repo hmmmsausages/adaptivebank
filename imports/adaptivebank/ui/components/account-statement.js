@@ -6,3 +6,10 @@ import {FlowRouter} from 'meteor/kadira:flow-router';
 
 import './account-statement.html';
 import './account-info-block.js'
+
+
+Template.Account_statement.helpers({
+    'transactions': function () {
+        return Meteor.user().profile.transactions;
+    }
+});

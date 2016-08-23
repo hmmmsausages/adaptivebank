@@ -1,8 +1,10 @@
 import {Template} from 'meteor/templating';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {Meteor} from 'meteor/meteor';
-
+import {Roles} from 'meteor/alanning:roles';
+import {$} from 'meteor/jquery';
 import './user-accounts-templates.html';
+
 
 Template.Login.events({
     'submit form': function (event) {
@@ -14,9 +16,13 @@ Template.Login.events({
         if (userIdVar && passwordVar) {
             Meteor.loginWithPassword(userIdVar, passwordVar, function (err) {
                 if (err) {
-                    console.log("login failed");
+                    $("#failed-login-msg-js").toggleClass('hidden');
                 } else {
-                    FlowRouter.go('App.account-summary');
+                    if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+                        FlowRouter.go('App.training-stats');
+                    } else {
+                        FlowRouter.go('App.account-summary');
+                    }
                 }
             });
         }

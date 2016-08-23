@@ -1,6 +1,6 @@
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
-
+import {Roles} from 'meteor/alanning:roles';
 
 // Import to load these templates
 import '../../ui/layout/app-body.js';
@@ -14,10 +14,14 @@ import '../../ui/pages/app-not-found.js';
 // Import to override user_accounts templates
 import '../../ui/user_accounts/user-accounts-templates.js';
 
+
 FlowRouter.route('/', {
     name: 'App.frontpage',
     action() {
-        if (Meteor.userId()) {
+        if (Roles.userIsInRole(Meteor.userId(), 'admin')) {
+            FlowRouter.go('App.training-stats');
+        }
+        else if (Meteor.userId()) {
             FlowRouter.go('App.account-summary');
         } else {
             BlazeLayout.render('App_body', {main: 'Frontpage'});

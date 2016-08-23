@@ -5,16 +5,15 @@ export let AdaptiveAdvice = {};
 
 function linkClicked(e) {
     AdaptiveAdvice.path.push($.trim($(this).attr('id') ? $(this).attr('id') : $(this).text()));
-    console.log("Path: " + AdaptiveAdvice.path);
-
-    console.log(AdaptiveAdvice.performedWell());
 }
 
 AdaptiveAdvice.idealPath = [];
 AdaptiveAdvice.limitOfAllowedPathAlterations = -1;
 AdaptiveAdvice.path = [];
+AdaptiveAdvice.timeLimit = -1;
+AdaptiveAdvice.timer = 0;
 
-AdaptiveAdvice.apply = function (idealPath, limitOfAllowedPathAlterations) {
+AdaptiveAdvice.apply = function (idealPath, limitOfAllowedPathAlterations, timeLimit) {
     if (idealPath) {
         check(idealPath, [String]);
         AdaptiveAdvice.idealPath = idealPath;
@@ -29,27 +28,35 @@ AdaptiveAdvice.apply = function (idealPath, limitOfAllowedPathAlterations) {
         AdaptiveAdvice.limitOfAllowedPathAlterations = -1;
     }
 
+    if (timeLimit) {
+        check(timeLimit, Match.Integer);
+        AdaptiveAdvice.timeLimit = timeLimit;
+    } else {
+        AdaptiveAdvice.timeLimit = -1;
+    }
 
-    AdaptiveAdvice.stop();
+    $('a').unbind('click', linkClicked);
     $('a').bind('click', linkClicked);
 };
 
 AdaptiveAdvice.stop = function () {
     $('a').unbind('click', linkClicked);
+    AdaptiveAdvice.timer = new Date() - AdaptiveAdvice.timer;
 };
 
 AdaptiveAdvice.resetParameter = function () {
     AdaptiveAdvice.idealPath = [];
     AdaptiveAdvice.limitOfAllowedPathAlterations = -1;
     AdaptiveAdvice.path = [];
+    AdaptiveAdvice.timer = new Date();
 };
 
 
 AdaptiveAdvice.performedWell = function () {
-    if (AdaptiveAdvice.limitOfAllowedPathAlterations < 0) {
+    if (AdaptiveAdvice.limitOfAllowedPathAlterations < 0 && AdaptiveAdvice.timer < 0) {
         return true;
     } else {
-        return levenshteinDistance(AdaptiveAdvice.path, AdaptiveAdvice.idealPath) <= AdaptiveAdvice.limitOfAllowedPathAlterations;
+        return (levenshteinDistance(AdaptiveAdvice.path, AdaptiveAdvice.idealPath) <= AdaptiveAdvice.limitOfAllowedPathAlterations) && (AdaptiveAdvice.timer < AdaptiveAdvice.timeLimit);
     }
 };
 

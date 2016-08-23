@@ -1,0 +1,108 @@
+<template name="Stats_overview">
+    <div class="ui grid">
+        <div class="sixteen wide column">
+            <div class="ui four statistics">
+                <div class="statistic">
+                    <div class="value">
+                        <i class="line chart icon"></i>{{countOfCompletedTasks}}
+                    </div>
+                    <div class="label">
+                        # Completed Tasks
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="value">
+                        <i class="thumbs outline up icon"></i>{{countOfWellPerformedTasks}}
+                    </div>
+                    <div class="label">
+                        # Well Performed Tasks
+                    </div>
+                </div>
+                <div class="green statistic">
+                    <div class="value">
+                        <i class="level up icon"></i>
+                        {{bestPerformedTask.taskclassId}}/{{bestPerformedTask.learningtaskId}}
+                    </div>
+                    <div class="label">
+                        Overall Best Performed Task
+                    </div>
+                </div>
+                <div class="red statistic">
+                    <div class="value">
+                        <i class="level down icon"></i>
+                        {{worstPerformedTask.taskclassId}}/{{worstPerformedTask.learningtaskId}}
+                    </div>
+                    <div class="label">
+                        Overall Worst Performed Task
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sixteen wide column">
+            <div class="ui four statistics">
+                <div class="statistic">
+                </div>
+                <div class="statistic">
+                    <div class="value">
+                        <i class="hourglass half icon"></i>{{formatTime avgTimePerTask}}
+                    </div>
+                    <div class="label">
+                        Average Time Per Task In Seconds
+                    </div>
+                </div>
+                <div class="statistic">
+                    <div class="value">
+                        <i class="signal icon"></i>{{mostPerformedTask.taskclassId}}
+                        /{{mostPerformedTask.learningtaskId}}
+                    </div>
+                    <div class="label">
+                        Most Performed Task
+                    </div>
+                </div>
+                <div class="statistic">
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="ui small celled padded table">
+        <thead>
+        <tr>
+            <th class="single line">Task Class #</th>
+            <th class="single line">Learning Task #</th>
+            <th>Adaptive Advice Result</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each stat in trainingStats}}
+            <tr class="{{#if stat.performedWell}}positive{{else}}negative{{/if}}">
+                <td>
+                    {{stat.taskclassId}}
+                </td>
+                <td class="single line">
+                    {{stat.learningtaskId}}
+                </td>
+                <td>
+                    Performed Well:
+                    {{#if stat.performedWell}}
+                        <i class="thumbs outline up icon"></i>
+                    {{else}}
+                        <i class="thumbs outline down icon"></i>
+                    {{/if}}
+                    <br>
+                    Time: {{formatTime stat.timeUntilGoal}}s
+                    <br>
+                    Time Limit: {{formatTime stat.timeLimit}}s
+                    <br>
+                    Path: [{{stat.path}}]
+                    <br>
+                    Ideal Path: [{{stat.idealPath}}]
+                </td>
+                <td class="right aligned">
+                    {{stat.lastExecutionDate}}
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>

@@ -1,4 +1,8 @@
 <template name="Task_overview">
+    <button id="back-to-instruction-js" class="ui green button">
+        <i class="left arrow icon"></i>
+        Resume with current task
+    </button>
     <div class="ui list">
         {{#each taskclass in instructions}}
             <div class="item">
@@ -7,10 +11,13 @@
                     {{#if taskclass.learningtasks}}
                         <div class="list">
                             {{#each learningtask in taskclass.learningtasks}}
-                                <a class="item">
-                                    <i class="play icon"></i>
-                                    <div class="content">
-                                        Task - {{learningtask.topic}}
+                                <a data-id="{{taskclass.id}}-{{learningtask.id}}" class="item learningtask-js">
+                                    <i data-id="{{taskclass.id}}-{{learningtask.id}}" class="play icon"></i>
+                                    <div data-id="{{taskclass.id}}-{{learningtask.id}}" class="content">
+                                        Task {{learningtask.id}} - {{learningtask.topic}}
+                                        {{#if isCurrentTask taskclass.id learningtask.id}}
+                                            <i class="ui left arrow icon"></i>
+                                        {{/if}}
                                     </div>
                                 </a>
                             {{/each}}

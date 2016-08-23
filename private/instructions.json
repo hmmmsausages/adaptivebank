@@ -1,54 +1,21 @@
 {
   "taskclass1": {
     "id": 1,
-    "topic": "Log-In / Log-Out",
+    "topic": "View Your Account Statement",
     "learningtasks": [
       {
         "id": 1,
-        "topic": "Imitation",
+        "topic": "Discover Your Account Statment",
         "description": [
-          "In order to be able to use online banking, every customer must authorise themselves before being able to access their online banking account.",
-          "This procedure requires some basic steps, which are need to be executed every time you want to start a new online banking session."
+          "One of the most helpful features of online banking is that you can have a look at your account's transactions in real-time, without leaving the house",
+          "The interface you're seeing currently might feel overwhelming with all its navigation elements.",
+          "Nevertheless the account statement overview should be found pretty quickly. Can you find it?"
         ],
         "steps": [
-          "Click on the 'Log In' button located in the upper right corner of the website.",
-          "Enter the Customer Number \"123456789\" into the field with the caption \"Customer number\".",
-          "Enter the Password \"testtest\" into the field with the caption \"Password\".",
-          "Subsequently click on the \"Log in\" button located underneath the input fields to log in to the online banking system."
+          "Click on the 'View Statement' button located in the right navigation bar of the website."
         ],
         "jit": [
-          "Username: 123456789",
-          "Password: testtest"
         ],
-        "deactivatedElements": [
-          "a"
-        ],
-        "activatedElements": [
-          "#login",
-          "#logout",
-          "#adaptive-bank-logo"
-        ],
-        "idealPath": [
-          "login"
-        ],
-        "limitOfAllowedPathAlterations": 4,
-        "taskGoals": {
-          "loggedIn": true,
-          "path": "/account-summary",
-          "query": "Meteor.users.find({username: '123456789'})"
-        }
-      },
-      {
-        "id": 2,
-        "topic": "Completion",
-        "description": [
-          "Learners have to recall the steps they took in the previous example: 1) Click on 'Log On' 2) Type in your credentials"
-        ],
-        "jit": [
-          "Username: 123456789",
-          "Password: testtest"
-        ],
-        "steps": [],
         "deactivatedElements": [
           "a"
         ],
@@ -56,77 +23,113 @@
           "#login",
           "#logout",
           "#adaptive-bank-logo",
-          "#make-payment"
+          "#view-statement"
         ],
-        "idealPath": [],
-        "limitOfAllowedPathAlterations": 0,
+        "idealPath": [
+          "view-statement"
+        ],
+        "maxTimeForTaskInMS": 20000,
+        "limitOfAllowedPathAlterations": 2,
+        "taskPrerequisites": {
+          "path": "/"
+        },
         "taskGoals": {
-          "loggedIn": true,
-          "path": "/payment"
+          "path": "/account-statement"
         }
       }
     ]
   },
   "taskclass2": {
     "id": 2,
-    "topic": "View Statement",
+    "topic": "Making Payments",
     "learningtasks": [
       {
         "id": 1,
-        "topic": "Completion",
+        "topic": "Your First Payment",
         "description": [
-          "One of the most comfortable features of online banking is the ability to view and check your incoming and outgoing transactions on your account statement from home, without the need of going to your local branch anymore. To do this you need to do following actions:"
+          "Apart from checking your account statements, another very helpful feature is the ability to make payments into other accounts.",
+          "In this task you will be making your first payment of £12 to an already set up recipient named \"Peter York\""
         ],
         "steps": [
-          "Log in to your online banking with your online banking credentials",
-          "Navigate to the \"View Statement\" page"
+          "Go to \"Make Payment\".",
+          "Select the right recipient.",
+          "Type optionally a reason or description of your payment into the \"Reference\" field.",
+          "Type in the right amount of money.",
+          "Click on continue."
         ],
         "jit": [
-          "Username: 123456789 - Password: testtest"
+          "Recipient: Peter York",
+          "Amount: £12.00"
         ],
         "deactivatedElements": [
           "a"
         ],
         "activatedElements": [
           "#login",
-          "#view-statement",
-          "#account-summary",
+          "#logout",
+          "#make-payment",
           "#adaptive-bank-logo"
         ],
         "idealPath": [
-          "login",
-          "view-statement"
+          "make-payment"
         ],
+        "maxTimeForTaskInMS": 30000,
         "limitOfAllowedPathAlterations": 2,
+        "taskPrerequisites": {
+          "path": "/",
+          "queries": [
+            "Meteor.users.update({_id: Meteor.userId()},{$pull:{'profile.transactions': {'out': '12.00', 'recipient': 'Peter York'}}})"
+          ]
+        },
         "taskGoals": {
-          "loggedIn": true,
-          "path": "/account-statement"
+          "path": "/payment",
+          "queries": [
+            "Meteor.users.find({_id: Meteor.userId(),'profile.transactions': {'$elemMatch': {'out': '12.00', 'recipient': 'Peter York'}}})"
+          ]
         }
       },
       {
         "id": 2,
-        "topic": "Imitation",
+        "topic": "Your First 'Independent' Payment",
         "description": [
-          "Another task !! .... "
+          "This time your task is it to make another payment to Peter York about £20.00 and set the reference to 'rent'.",
+          "After you've successfully completed the payment, please go to view your statement, you will see that the new transaction is already there."
         ],
         "steps": [],
         "jit": [
-          "Username: 123456789 - Password: testtest"
+          "Recipient: Peter York",
+          "Reference: fuel",
+          "Amount: £20.00"
         ],
         "deactivatedElements": [
           "a"
         ],
         "activatedElements": [
           "#login",
+          "#logout",
+          "#make-payment",
+          "#adaptive-bank-logo",
           "#view-statement",
-          "#account-summary",
-          "#adaptive-bank-logo"
+          "#account-summary"
         ],
-        "idealPath": [],
-        "limitOfAllowedPathAlterations": 4,
+        "idealPath": [
+          "make-payment",
+          "account-summary",
+          "view-statement"
+        ],
+        "maxTimeForTaskInMS": 240000,
+        "limitOfAllowedPathAlterations": 1,
+        "taskPrerequisites": {
+          "path": "/",
+          "queries": [
+            "Meteor.users.update({_id: Meteor.userId()},{$pull:{'profile.transactions': {'out': '20.00', 'recipient': 'Peter York', 'description': 'fuel'}}})"
+          ]
+        },
         "taskGoals": {
-          "loggedIn": true,
-          "path": "/view-statement-plschangeurl"
+          "path": "/account-statement",
+          "queries": [
+            "Meteor.users.find({_id: Meteor.userId(),'profile.transactions': {'$elemMatch': {'out': '20.00', 'recipient': 'Peter York', 'description': 'fuel'}}})"
+          ]
         }
       }
     ]

@@ -1,13 +1,15 @@
 <template name="Account_statement">
     {{> Navbar_login}}
 
+
     <div class="ui grid">
         <div class="twelve wide column">
             {{> Account_info_block}}
             <div class="stretched row">
                 <div class="column">
                     <div class="ui large fluid vertical menu">
-                        <a href="{{pathFor 'App.payment'}}" class="item">Make a payment<i class="angle right icon"></i></a>
+                        <a href="{{pathFor 'App.payment'}}" class="item">Make a payment<i
+                                class="angle right icon"></i></a>
                         <a class="item">Upgrade account<i class="angle right icon"></i></a>
                         <a class="active item">More actions<i class="angle right icon"></i></a>
                     </div>
@@ -28,30 +30,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>31 May 16</td>
-                        <td>Sainsbury's STRAND</td>
-                        <td>CPT</td>
-                        <td></td>
-                        <td>10.00</td>
-                        <td>449.20</td>
-                    </tr>
-                    <tr>
-                        <td>27 May 16</td>
-                        <td>Amazon UK</td>
-                        <td>DEB</td>
-                        <td></td>
-                        <td>23.00</td>
-                        <td>459.20</td>
-                    </tr>
-                    <tr>
-                        <td>25 May 16</td>
-                        <td>Peter Jackson</td>
-                        <td>DEB</td>
-                        <td>100.00</td>
-                        <td></td>
-                        <td>472.20</td>
-                    </tr>
+                    {{#each transaction in transactions}}
+                        <tr>
+                            <td>{{transaction.date}}</td>
+                            <td>{{transaction.description}}</td>
+                            <td>{{transaction.type}}</td>
+                            <td>{{transaction.in}}</td>
+                            <td>{{transaction.out}}</td>
+                            <td>{{transaction.balance}}</td>
+                        </tr>
+                    {{/each}}
                     </tbody>
                 </table>
             </div>

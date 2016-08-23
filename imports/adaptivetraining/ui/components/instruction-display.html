@@ -1,36 +1,40 @@
 <template name="Instruction_display">
-    {{#each instructions}}
+    {{#each taskclass in instructions}}
         <div class="ui grid">
             <div class="row">
-                <h2>Taskclass: "{{topic}}"</h2>
+                <h2>Taskclass {{taskclass.id}}: "{{taskclass.topic}}"</h2>
                 <div class="one wide column"></div>
                 <button id="task-overview" class="ui green button">
                     <i class="browser icon"></i>
                     Task Overview
                 </button>
+                <button id="restart-task" class="ui green button">
+                    <i class="refresh icon"></i>
+                    Restart Task
+                </button>
             </div>
-            {{#each learningtasks}}
+            {{#each learningtask in taskclass.learningtasks}}
                 <div class="row">
                     <div class="twelve wide column">
-                        <h3>Learning task No. {{id}}</h3>
-                        {{#each description}}
-                            <p>{{this}}</p>
+                        <h3>Learning task No. {{learningtask.id}}</h3>
+                        {{#each description in learningtask.description}}
+                            <p>{{description}}</p>
                         {{/each}}
-                        {{#if steps}}
+                        {{#if learningtask.steps}}
                             <h4>Steps:</h4>
                             <ol>
-                                {{#each steps}}
-                                    <li>{{this}}</li>
+                                {{#each step in learningtask.steps}}
+                                    <li>{{step}}</li>
                                 {{/each}}
                             </ol>
                         {{/if}}
                     </div>
                     <div class="four wide column">
-                        {{#if jit}}
+                        {{#if learningtask.jit}}
                             <h4>Supportive Information</h4>
                             <ul>
-                                {{#each jit}}
-                                    <li>{{this}}</li>
+                                {{#each jit in learningtask.jit}}
+                                    <li>{{jit}}</li>
                                 {{/each}}
                             </ul>
                         {{/if}}

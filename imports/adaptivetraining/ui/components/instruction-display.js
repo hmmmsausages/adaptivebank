@@ -76,7 +76,11 @@ Template.Instruction_display.onCreated(function () {
                     deactivatedElements: deactivatedElements,
                     activatedElements: activatedElements
                 });
-                AdaptiveAdvice.apply(idealPath, limitOfAllowedPathAlterations, timeLimit);
+                AdaptiveAdvice.apply({
+                    idealPath: idealPath,
+                    limitOfAllowedPathAlterations: limitOfAllowedPathAlterations,
+                    timeLimit: timeLimit
+                });
 
                 if (TaskEvaluation.observeTaskGoals(taskGoals)) {
                     Session.set('currentTrainingView', 'Task_complete');
@@ -94,7 +98,11 @@ Template.Instruction_display.onCreated(function () {
                         deactivatedElements: deactivatedElements,
                         activatedElements: activatedElements
                     });
-                    AdaptiveAdvice.apply(idealPath, limitOfAllowedPathAlterations, timeLimit);
+                    AdaptiveAdvice.apply({
+                        idealPath: idealPath,
+                        limitOfAllowedPathAlterations: limitOfAllowedPathAlterations,
+                        timeLimit: timeLimit
+                    });
                     if (TaskEvaluation.observeTaskGoals(taskGoals)) {
                         Session.set('currentTrainingView', 'Task_complete');
                     }

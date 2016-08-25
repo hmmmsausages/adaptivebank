@@ -14,17 +14,17 @@ AdaptiveComplexity.apply = function (elements) {
     AdaptiveComplexity.reset();
 
     // Bind elements
-    if (elements) {
+    if (elements !== undefined) {
         check(elements, {
             deactivatedElements: Match.Maybe(String),
             activatedElements: Match.Maybe(String)
         });
 
-        if (elements.deactivatedElements) {
+        if (elements.deactivatedElements !== undefined) {
             $(elements.deactivatedElements).bind('click', preventLinkExecution).addClass('disabled');
         }
 
-        if (elements.activatedElements) {
+        if (elements.activatedElements !== undefined) {
             $(elements.activatedElements).unbind('click', preventLinkExecution).removeClass('disabled');
         }
     }

@@ -1,8 +1,9 @@
+import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
 import {FlowRouter} from 'meteor/kadira:flow-router';
-import {Meteor} from 'meteor/meteor';
 import {Roles} from 'meteor/alanning:roles';
 import {$} from 'meteor/jquery';
+
 import './user-accounts-templates.html';
 
 

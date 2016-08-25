@@ -2,7 +2,7 @@ import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {check, Match} from 'meteor/check';
 
-import {AdaptiveAdvice} from './adaptive-advice.js';
+
 import {Instructions} from './instructions.js';
 
 export const TrainingProgress = new Mongo.Collection("trainingProgress");

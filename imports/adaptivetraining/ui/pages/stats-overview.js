@@ -33,7 +33,7 @@ Template.Stats_overview.helpers({
     },
     'worstPerformedTask': function () {
         Meteor.call('worstPerformedTask', function (err, res) {
-            if (res) {
+            if (res.length > 0) {
                 worstPerformedTaskVar.set('taskclassId', res[0]._id.taskclassId);
                 worstPerformedTaskVar.set('learningtaskId', res[0]._id.learningtaskId);
             }
@@ -45,7 +45,7 @@ Template.Stats_overview.helpers({
     },
     'bestPerformedTask': function () {
         Meteor.call('bestPerformedTask', function (err, res) {
-            if (res) {
+            if (res.length > 0) {
                 bestPerformedTaskVar.set('taskclassId', res[0]._id.taskclassId);
                 bestPerformedTaskVar.set('learningtaskId', res[0]._id.learningtaskId);
             }
@@ -57,7 +57,7 @@ Template.Stats_overview.helpers({
     },
     'avgTimePerTask': function () {
         Meteor.call('avgTimePerTask', function (err, res) {
-            if (res) {
+            if (res.length > 0) {
                 avgTimePerTask.set(res[0].avgTimePerTask);
             }
         });
@@ -65,7 +65,7 @@ Template.Stats_overview.helpers({
     },
     'mostPerformedTask': function () {
         Meteor.call('mostPerformedTask', function (err, res) {
-            if (res) {
+            if (res.length > 0) {
                 mostPerformedTaskVar.set('taskclassId', res[0]._id.taskclassId);
                 mostPerformedTaskVar.set('learningtaskId', res[0]._id.learningtaskId);
             }

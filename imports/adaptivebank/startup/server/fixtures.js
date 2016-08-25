@@ -1,4 +1,3 @@
-import {Clients} from '../../api/clients/clients.js'
 import {Meteor} from 'meteor/meteor';
 
 Meteor.startup(() => {
@@ -23,8 +22,8 @@ Meteor.startup(() => {
                     type: 'current',
                     irate: 0.01,
                     overdraft: 0,
-                    balance: 123.45,
-                    available: 123.45,
+                    balance: 500.00,
+                    available: 500.0,
                 },
                 recipients: [
                     {
@@ -44,7 +43,7 @@ Meteor.startup(() => {
                         out: 12.00,
                         type: "TRANS",
                         description: "Cheese",
-                        balance: 123.45,
+                        balance: 500.00,
                         recipientNumber: "54729429273",
                         recipient: "Peter York"
                     },
@@ -53,7 +52,7 @@ Meteor.startup(() => {
                         out: 25.00,
                         type: "DEB",
                         description: "Sainsburys",
-                        balance: 135.45,
+                        balance: 512.00,
                         recipientNumber: "56478976",
                         recipient: "Sainsburys"
                     }

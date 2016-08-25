@@ -29,7 +29,7 @@
           "view-statement"
         ],
         "maxTimeForTaskInMS": 20000,
-        "limitOfAllowedPathAlterations": 2,
+        "limitOfAllowedPathAlterations": 1,
         "taskPrerequisites": {
           "path": "/"
         },
@@ -74,7 +74,7 @@
           "make-payment"
         ],
         "maxTimeForTaskInMS": 30000,
-        "limitOfAllowedPathAlterations": 2,
+        "limitOfAllowedPathAlterations": 1,
         "taskPrerequisites": {
           "path": "/",
           "queries": [
@@ -117,8 +117,8 @@
           "account-summary",
           "view-statement"
         ],
-        "maxTimeForTaskInMS": 240000,
-        "limitOfAllowedPathAlterations": 1,
+        "maxTimeForTaskInMS": 60000,
+        "limitOfAllowedPathAlterations": 2,
         "taskPrerequisites": {
           "path": "/",
           "queries": [

@@ -3,7 +3,6 @@ import {$} from 'meteor/jquery';
 import {Template} from 'meteor/templating';
 import {BlazeLayout} from 'meteor/kadira:blaze-layout';
 import {Session} from 'meteor/session';
-import {Tracker} from 'meteor/tracker';
 
 import './training-addon-body.html';
 
@@ -12,19 +11,9 @@ import '../components/instruction-welcome.js';
 
 Template.Training_addon_body.onCreated(function () {
     Session.set('currentTrainingView', 'Instruction_welcome');
-
-
-    // Tracker.autorun(function () {
-    //     if (!Meteor.userId()) {
-    //         Session.set('currentTrainingView', 'Instruction_welcome');
-    //     } else {
-    //         Session.set('currentTrainingView', 'Task_overview');
-    //     }
-    // });
 });
 
 Template.Training_addon_body.onRendered(function () {
-    //TODO: Resolve sidebar issues and JS errors with pusher class
     Meteor.defer(function () {
         $('.ui.sidebar').sidebar({
             transition: 'overlay',

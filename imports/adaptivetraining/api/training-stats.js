@@ -1,7 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 import {Roles} from 'meteor/alanning:roles';
-import {check, Match} from 'meteor/check';
 
 
 export const TrainingStats = new Mongo.Collection("trainingStats");

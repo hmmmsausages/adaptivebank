@@ -1,3 +1,4 @@
+import {Meteor} from 'meteor/meteor';
 import {$} from 'meteor/jquery';
 import {check, Match} from 'meteor/check';
 
@@ -8,56 +9,61 @@ function linkClicked(e) {
 }
 
 AdaptiveAdvice.idealPath = [];
-AdaptiveAdvice.limitOfAllowedPathAlterations = -1;
+AdaptiveAdvice.limitOfAllowedPathAlterations = Infinity;
 AdaptiveAdvice.path = [];
-AdaptiveAdvice.timeLimit = -1;
+AdaptiveAdvice.timeLimit = Infinity;
 AdaptiveAdvice.timer = 0;
 
-AdaptiveAdvice.apply = function (idealPath, limitOfAllowedPathAlterations, timeLimit) {
-    if (idealPath) {
-        check(idealPath, [String]);
-        AdaptiveAdvice.idealPath = idealPath;
+AdaptiveAdvice.apply = function (options) {
+    if (options) {
+        if (options.idealPath !== undefined) {
+            check(options.idealPath, [String]);
+            AdaptiveAdvice.idealPath = options.idealPath;
+        } else {
+            AdaptiveAdvice.idealPath = [];
+        }
+
+        if (options.limitOfAllowedPathAlterations !== undefined) {
+            check(options.limitOfAllowedPathAlterations, Number);
+            AdaptiveAdvice.limitOfAllowedPathAlterations = options.limitOfAllowedPathAlterations;
+        } else {
+            AdaptiveAdvice.limitOfAllowedPathAlterations = Infinity;
+        }
+
+        if (options.timeLimit !== undefined) {
+            check(options.timeLimit, Number);
+            AdaptiveAdvice.timeLimit = options.timeLimit;
+        } else {
+            AdaptiveAdvice.timeLimit = Infinity;
+        }
     } else {
-        AdaptiveAdvice.idealPath = [];
+        AdaptiveAdvice.resetParameter();
     }
 
-    if (limitOfAllowedPathAlterations) {
-        check(limitOfAllowedPathAlterations, Match.Integer);
-        AdaptiveAdvice.limitOfAllowedPathAlterations = limitOfAllowedPathAlterations;
-    } else {
-        AdaptiveAdvice.limitOfAllowedPathAlterations = -1;
+    if (Meteor.isClient) {
+        $('a').unbind('click', linkClicked);
+        $('a').bind('click', linkClicked);
     }
-
-    if (timeLimit) {
-        check(timeLimit, Match.Integer);
-        AdaptiveAdvice.timeLimit = timeLimit;
-    } else {
-        AdaptiveAdvice.timeLimit = -1;
-    }
-
-    $('a').unbind('click', linkClicked);
-    $('a').bind('click', linkClicked);
 };
 
 AdaptiveAdvice.stop = function () {
-    $('a').unbind('click', linkClicked);
+    if (Meteor.isClient) {
+        $('a').unbind('click', linkClicked);
+    }
     AdaptiveAdvice.timer = new Date() - AdaptiveAdvice.timer;
 };
 
 AdaptiveAdvice.resetParameter = function () {
     AdaptiveAdvice.idealPath = [];
-    AdaptiveAdvice.limitOfAllowedPathAlterations = -1;
+    AdaptiveAdvice.limitOfAllowedPathAlterations = Infinity;
+    AdaptiveAdvice.timeLimit = Infinity;
     AdaptiveAdvice.path = [];
     AdaptiveAdvice.timer = new Date();
 };
 
 
 AdaptiveAdvice.performedWell = function () {
-    if (AdaptiveAdvice.limitOfAllowedPathAlterations < 0 && AdaptiveAdvice.timer < 0) {
-        return true;
-    } else {
-        return (levenshteinDistance(AdaptiveAdvice.path, AdaptiveAdvice.idealPath) <= AdaptiveAdvice.limitOfAllowedPathAlterations) && (AdaptiveAdvice.timer < AdaptiveAdvice.timeLimit);
-    }
+    return (levenshteinDistance(AdaptiveAdvice.path, AdaptiveAdvice.idealPath) <= AdaptiveAdvice.limitOfAllowedPathAlterations) && (AdaptiveAdvice.timer < AdaptiveAdvice.timeLimit);
 };
 
 

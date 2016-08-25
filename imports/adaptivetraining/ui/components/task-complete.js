@@ -1,5 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {Template} from 'meteor/templating';
+import {Session} from 'meteor/session';
 import {AdaptiveAdvice} from '../../api/adaptive-advice.js';
 
 import {TrainingProgress} from '../../api/training-progress.js';
@@ -27,6 +28,7 @@ Template.Task_complete.onRendered(function () {
         learningtaskId = trainingProgress.currentTask.learningtaskId;
     }
 
+    Meteor.call('updateTask', taskclassId, learningtaskId);
 
     Meteor.call('updateStats', taskclassId, learningtaskId, {
         taskclassId: taskclassId,

@@ -1,14 +1,13 @@
 import {Template} from 'meteor/templating';
 import {Meteor} from 'meteor/meteor';
 import {$} from 'meteor/jquery';
-import {Semantic} from 'meteor/semantic:ui-css';
 import {ReactiveVar} from 'meteor/reactive-var';
 
 import './payment.html';
 import './account-info-block.js';
 
 //Import profile methods
-import '../../ui/api/profile.js';
+import '../../api/profile.js';
 
 let notEnoughFunds = new ReactiveVar(false);
 let transactionExecuted = new ReactiveVar(false);
